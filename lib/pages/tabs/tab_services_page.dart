@@ -28,7 +28,6 @@ class TabServicesPage extends StatelessWidget {
 }
 
 Widget buildCard(BuildContext context, Service servicio) {
-  final kPrimaryColor = Colors.red;
   return Card(
     elevation: 5.0,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),

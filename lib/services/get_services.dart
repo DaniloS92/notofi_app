@@ -15,6 +15,8 @@ class GetServices with ChangeNotifier {
   // Create storage
   final _storage = new FlutterSecureStorage();
 
+  final List<Service> arrayServices = [];
+
   // bool get loadServicesData => this._loadServicesData;
 
   // set loadServicesData(bool value) {
@@ -27,6 +29,10 @@ class GetServices with ChangeNotifier {
 
     final token = await this._storage.read(key: 'token');
 
+    if (arrayServices.length > 0) {
+      return arrayServices;
+    }
+
     final headers = {
       'Authorization': token,
       'Content-Type': 'application/json',
@@ -37,7 +43,6 @@ class GetServices with ChangeNotifier {
     final resp = await http.get(uri, headers: headers);
 
     print(resp.body);
-    final List<Service> arrayServices = [];
     // this.loadServicesData = false;
     if (resp.statusCode == 200) {
       final services = json.decode(resp.body)['services'];

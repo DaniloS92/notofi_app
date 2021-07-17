@@ -1,3 +1,4 @@
+// import 'package:chat/helpers/mostrar_alerta.dart';
 import 'package:chat/models/usuario.dart';
 import 'package:chat/services/auth_service.dart';
 import 'package:chat/widgets/btn_azul.dart';
@@ -75,10 +76,29 @@ class _TabProfilePageState extends State<TabProfilePage> {
             // Todo: Aqui hay que crear el boton
             BotonAzul(
               text: 'Actualizar',
-              onPressed: () {},
+              onPressed: authService.autenticando
+                  ? null
+                  : () async {
+                      FocusScope.of(context).unfocus();
+                      final registerOk = await authService.updateUser(
+                          nameCtr.text.trim(),
+                          emailCtr.text.trim(),
+                          passCtr.text.trim(),
+                          lastnameCtr.text.trim(),
+                          phoneCtr.text.trim());
+
+                      // if (registerOk == true) {
+                      //   //TODO: Conectar al socket service
+                      //   Navigator.pushReplacementNamed(context, 'usuarios');
+                      // } else {
+                      //   // Mostrar Alerta
+                      //   mostrarAlerta(context, 'Registro Incorrecto', registerOk);
+                      // }
+                    },
             ),
             SizedBox(height: 10),
             BotonAzul(
+              color: Colors.black54,
               text: 'Cerrar sesión',
               onPressed: () {
                 AuthService.deleteToken();

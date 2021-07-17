@@ -50,6 +50,7 @@ class AuthService with ChangeNotifier {
       final loginResponse = loginResponseFromJson(resp.body);
       this.usuario = loginResponse.usuario;
       await this._guardarToken(loginResponse.token);
+      await this._guardarIdUsuario(usuario.id);
       return true;
     } else {
       return false;
@@ -74,6 +75,48 @@ class AuthService with ChangeNotifier {
       uri,
       body: jsonEncode(data),
       headers: {'Content-Type': 'application/json'},
+    );
+
+    this.autenticando = false;
+
+    if (resp.statusCode == 200) {
+      final loginResponse = loginResponseFromJson(resp.body);
+      this.usuario = loginResponse.usuario;
+      // await this._guardarToken(loginResponse.token);
+      await this.login(email, pass);
+      return true;
+    } else {
+      final respBody = jsonDecode(resp.body);
+      return respBody['msg'];
+    }
+  }
+
+  Future updateUser(String nombre, String email, String pass, String apellido,
+      String phone) async {
+    this.autenticando = true;
+
+    final data = {
+      'name': nombre,
+      'email': email,
+      'password': pass,
+      'lastname': apellido,
+      'phone': phone
+    };
+
+    final idUser = await this._storage.read(key: 'usuario_id');
+    final token = await this._storage.read(key: 'token');
+
+    final headers = {
+      'Authorization': token,
+      'Content-Type': 'application/json',
+    };
+
+    Uri uri = Uri.parse('${Enviroment.apiUrl}/api/update-user/$idUser');
+
+    final resp = await http.put(
+      uri,
+      body: jsonEncode(data),
+      headers: headers,
     );
 
     this.autenticando = false;
@@ -118,7 +161,12 @@ class AuthService with ChangeNotifier {
     return await _storage.write(key: 'token', value: token);
   }
 
+  Future _guardarIdUsuario(String id) async {
+    return await _storage.write(key: 'usuario_id', value: id);
+  }
+
   Future logout() async {
     await _storage.delete(key: 'token');
+    await _storage.delete(key: 'usuario_id');
   }
 }

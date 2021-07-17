@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Logo(
-                  titulo: 'Notify App',
+                  titulo: 'Login',
                 ),
                 _Form(),
                 Labels(
@@ -56,7 +56,7 @@ class __FormState extends State<_Form> {
     final authService = Provider.of<AuthService>(context);
 
     return Container(
-      margin: EdgeInsets.only(top: 40),
+      margin: EdgeInsets.only(top: 10),
       padding: EdgeInsets.symmetric(horizontal: 50),
       child: Column(
         children: [
@@ -82,7 +82,7 @@ class __FormState extends State<_Form> {
 
                     if (loginOk) {
                       Navigator.pushReplacementNamed(context, 'home_screen');
-                      // TODO: Conectar a nuestro socket server
+                      // Implementar Guardado Token en firebase
                     } else {
                       // Mostrar Alerta
                       mostrarAlerta(context, 'Login Incorrecto',

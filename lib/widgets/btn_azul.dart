@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 class BotonAzul extends StatelessWidget {
-
   final String text;
   final VoidCallback onPressed;
 
   const BotonAzul({
-    Key key, 
-    @required this.text, 
+    Key key,
+    @required this.text,
     @required this.onPressed,
   }) : super(key: key);
 

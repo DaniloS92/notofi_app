@@ -76,6 +76,14 @@ class _TabProfilePageState extends State<TabProfilePage> {
             BotonAzul(
               text: 'Actualizar',
               onPressed: () {},
+            ),
+            SizedBox(height: 10),
+            BotonAzul(
+              text: 'Cerrar sesión',
+              onPressed: () {
+                AuthService.deleteToken();
+                Navigator.pushReplacementNamed(context, 'login');
+              },
             )
           ],
         ),

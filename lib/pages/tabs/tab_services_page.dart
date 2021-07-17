@@ -39,7 +39,8 @@ Widget buildCard(BuildContext context, Service servicio) {
             height: 300.0,
             width: double.infinity,
             fit: BoxFit.cover,
-            image: 'https://pbs.twimg.com/media/DPPx1CLXkAAY6q7.jpg',
+            image:
+                'https://st2.depositphotos.com/7865540/11071/i/450/depositphotos_110717374-stock-photo-businessman-showing-paper.jpg',
             placeholder: "assets/images/loading.gif",
           ),
         ),
@@ -64,7 +65,7 @@ Widget buildCard(BuildContext context, Service servicio) {
               // FlatButton(onPressed: () => {}, child: Text('Cancelar')),
               TextButton(
                   onPressed: () => {print(servicio.id)},
-                  child: Text('Ingresar')),
+                  child: Text('Reservar')),
             ],
           ),
         )

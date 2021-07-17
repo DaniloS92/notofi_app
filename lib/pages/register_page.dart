@@ -21,7 +21,7 @@ class RegisterPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Logo(titulo: 'Notify App'),
+                Logo(titulo: 'Registro'),
                 _Form(),
                 Labels(ruta: 'login', login: false),
                 Text(

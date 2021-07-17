@@ -1,6 +1,5 @@
 import 'package:chat/pages/tabs/tab_appointment.dart';
 import 'package:chat/pages/tabs/tab_profile.dart';
-// import 'package:chat/pages/tabs/tab_promotions_page.dart';
 import 'package:chat/pages/tabs/tab_services_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +11,7 @@ class HomeScreen extends StatelessWidget {
       create: (_) => _NavegacionModel(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text("NotifyApp"),
+          title: Text("Sbelta App"),
           centerTitle: true,
         ),
         body: _Paginas(),
@@ -32,26 +31,21 @@ class _Navegacion extends StatelessWidget {
     final navegacionModel = Provider.of<_NavegacionModel>(context);
 
     return BottomNavigationBar(
-      // type: BottomNavigationBarType.fixed,
       currentIndex: navegacionModel.paginaActual,
       onTap: (i) => navegacionModel.paginaActual = i,
       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.person_outline),
-          label: 'Perfil',
-        ),
-        BottomNavigationBarItem(
           icon: Icon(Icons.public),
           label: 'Servicios',
         ),
-        // BottomNavigationBarItem(
-        //   icon: Icon(Icons.point_of_sale),
-        //   label: 'Promociones',
-        // ),
         BottomNavigationBarItem(
           icon: Icon(Icons.point_of_sale),
           label: 'Mis Citas',
-        )
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person_outline),
+          label: 'Perfil',
+        ),
       ],
     );
   }
@@ -67,10 +61,9 @@ class _Paginas extends StatelessWidget {
       // physics: BouncingScrollPhysics(),
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
-        TabProfilePage(),
         TabServicesPage(),
-        // TabPromotionsPage(),
-        TabAppointmentPage()
+        TabAppointmentPage(),
+        TabProfilePage(),
       ],
     );
   }

@@ -125,7 +125,8 @@ class AuthService with ChangeNotifier {
       final loginResponse = loginResponseFromJson(resp.body);
       this.usuario = loginResponse.usuario;
       // await this._guardarToken(loginResponse.token);
-      await this.login(email, pass);
+      // await this.login(email, pass);
+      notifyListeners();
       return true;
     } else {
       final respBody = jsonDecode(resp.body);

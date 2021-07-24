@@ -59,13 +59,27 @@ addReservation(BuildContext context) {
                   date.timeZoneOffset.inHours.toString());
             }, onConfirm: (date) {
               print('confirm $date');
+              String formattedDate = format.format(date);
+              textController..text = formattedDate;
             },
                 pickerModel: BookingTimePicker(
                     currentTime: DateTime.now(), locale: LocaleType.es));
           },
-          child: Text(
-            'Seleccione aqui la fecha y hora de su reservación',
-            style: TextStyle(color: Colors.blue),
+          child: Container(
+            height: 100,
+            child: Column(
+              children: [
+                Text(
+                  'Seleccione aqui la fecha y hora de su reservación',
+                  style: TextStyle(color: Colors.blue),
+                ),
+                TextField(
+                  controller: textController,
+                  autocorrect: false,
+                  enabled: false,
+                )
+              ],
+            ),
           )),
       // content: DateTimeField(
       //   format: format,
@@ -92,7 +106,7 @@ addReservation(BuildContext context) {
           child: Text('Agregar'),
           elevation: 5,
           textColor: Colors.blue,
-          onPressed: null,
+          onPressed: () {},
           //onPressed: () => addBandToList(textController.text),
         )
       ],

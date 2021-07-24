@@ -66,6 +66,7 @@ class AuthService with ChangeNotifier {
       'email': email,
       'password': pass,
       'lastname': apellido,
+      'role': 'cliente',
       'phone': phone
     };
 

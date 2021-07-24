@@ -21,11 +21,14 @@ class ReservationService with ChangeNotifier {
     notifyListeners();
   }
 
-  Future updateUser(String idService) async {
+  Future resgisterReservation(String idService) async {
     this.autenticando = true;
 
     final data = {
-      'idService': idService,
+      'service_id': idService,
+      'date': '',
+      'hour': '',
+      'user_id': ''
     };
 
     final idUser = await this._storage.read(key: 'usuario_id');

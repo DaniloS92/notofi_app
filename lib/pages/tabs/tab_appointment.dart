@@ -47,33 +47,6 @@ Widget buildListProduct(BuildContext context) {
             ),
           ),
         ),
-        // Padding(
-        //   padding: EdgeInsets.symmetric(horizontal: 16.0),
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //     children: [
-        //       Text(
-        //         'Sonrisas:',
-        //         style: TextStyle(
-        //             color: Colors.black.withOpacity(0.6), fontSize: 16.0),
-        //       ),
-        //       Text(
-        //         '+ 70',
-        //         style: TextStyle(
-        //             color: Colors.green,
-        //             fontSize: 16.0,
-        //             fontWeight: FontWeight.bold),
-        //       )
-        //     ],
-        //   ),
-        // ),
-        // Padding(
-        //   padding: EdgeInsets.all(16.0),
-        //   child: Text(
-        //     'Greyhound divisively hello coldly wonderfully marginally far upon excluding.',
-        //     style: TextStyle(color: Colors.black.withOpacity(0.6)),
-        //   ),
-        // ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

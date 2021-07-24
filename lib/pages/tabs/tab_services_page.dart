@@ -1,3 +1,4 @@
+import 'package:chat/helpers/mostrar_alerta.dart';
 import 'package:chat/models/service.dart';
 import 'package:chat/services/get_services.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +65,7 @@ Widget buildCard(BuildContext context, Service servicio) {
               // Text("Promoción válida hasta el 17/Julio/2021", style: dateStyle),
               // FlatButton(onPressed: () => {}, child: Text('Cancelar')),
               TextButton(
-                  onPressed: () => {print(servicio.id)},
+                  onPressed: () => {addReservation(context)},
                   child: Text('Reservar')),
             ],
           ),

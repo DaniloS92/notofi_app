@@ -3,6 +3,7 @@ import 'package:chat/services/auth_service.dart';
 import 'package:chat/services/get_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -24,6 +25,14 @@ class MyApp extends StatelessWidget {
         title: 'Chat App',
         initialRoute: 'login',
         routes: appRoutes,
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('es'), // Spanish
+        ],
       ),
     );
   }

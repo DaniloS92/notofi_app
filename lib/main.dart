@@ -1,6 +1,7 @@
 import 'package:chat/routes/routes.dart';
 import 'package:chat/services/auth_service.dart';
 import 'package:chat/services/get_services.dart';
+import 'package:chat/services/reservation_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthService()),
         ChangeNotifierProvider(create: (_) => GetServices()),
+        ChangeNotifierProvider(create: (_) => ReservationService()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

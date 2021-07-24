@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:chat/models/reservation.dart';
 import 'package:chat/models/usuario.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -9,53 +10,36 @@ import 'package:chat/global/enviroment.dart';
 
 class ReservationService with ChangeNotifier {
   Usuario usuario;
-  bool _autenticando = false;
 
   // Create storage
   final _storage = new FlutterSecureStorage();
 
-  bool get autenticando => this._autenticando;
+  final List<Reservation> arrayReservation = [];
 
-  set autenticando(bool value) {
-    this._autenticando = value;
-    notifyListeners();
-  }
-
-  Future resgisterReservation(String idService) async {
-    this.autenticando = true;
-
-    final data = {
-      'service_id': idService,
-      'date': '',
-      'hour': '',
-      'user_id': ''
-    };
-
-    final idUser = await this._storage.read(key: 'usuario_id');
+  Future<List<Reservation>> getAllReservation() async {
     final token = await this._storage.read(key: 'token');
+    final idUser = await this._storage.read(key: 'usuario_id');
+
+    if (arrayReservation.length > 0) {
+      return arrayReservation;
+    }
 
     final headers = {
       'Authorization': token,
       'Content-Type': 'application/json',
     };
 
-    Uri uri = Uri.parse('${Enviroment.apiUrl}/api/update-user/$idUser');
+    Uri uri = Uri.parse('${Enviroment.apiUrl}/api/get-reservations');
 
-    final resp = await http.put(
-      uri,
-      body: jsonEncode(data),
-      headers: headers,
-    );
-
-    this.autenticando = false;
+    final resp = await http.get(uri, headers: headers);
 
     if (resp.statusCode == 200) {
-      // Aqui mandamos a actualizar la lista de reservaciones
-      notifyListeners();
-      return true;
-    } else {
-      final respBody = jsonDecode(resp.body);
-      return respBody['msg'];
+      final services = json.decode(resp.body)['Reservations'];
+
+      for (final line in services) {
+        arrayReservation.add(Reservation.fromJson(line));
+      }
     }
+    return arrayReservation;
   }
 }

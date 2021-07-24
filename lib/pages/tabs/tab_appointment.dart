@@ -1,25 +1,47 @@
+import 'package:chat/models/reservation.dart';
+import 'package:chat/services/reservation_services.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TabAppointmentPage extends StatelessWidget {
   const TabAppointmentPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // return Container(
+    //   padding: EdgeInsets.symmetric(horizontal: 5.0),
+    //   child: ListView(
+    //     children: [
+    //       buildListProduct(context),
+    //       buildListProduct(context),
+    //       buildListProduct(context),
+    //       buildListProduct(context),
+    //     ],
+    //   ),
+    // );
+    final getReservation =
+        Provider.of<ReservationService>(context, listen: false);
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 5.0),
-      child: ListView(
-        children: [
-          buildListProduct(context),
-          buildListProduct(context),
-          buildListProduct(context),
-          buildListProduct(context),
-        ],
+      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+      child: FutureBuilder(
+        future: getReservation.getAllReservation(),
+        builder: (BuildContext _, AsyncSnapshot<List<Reservation>> snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
+          }
+          final reservaciones = snapshot.data;
+          return ListView.builder(
+            itemCount: reservaciones.length,
+            itemBuilder: (context, i) =>
+                buildListProduct(context, reservaciones[i]),
+          );
+        },
       ),
     );
   }
 }
 
-Widget buildListProduct(BuildContext context) {
+Widget buildListProduct(BuildContext context, Reservation reservacion) {
   final kPrimaryColor = Theme.of(context).primaryColor;
   return Card(
     clipBehavior: Clip.antiAlias,
@@ -53,7 +75,7 @@ Widget buildListProduct(BuildContext context) {
             Container(
               padding: EdgeInsets.only(left: 16.0),
               child: Text(
-                '17/07/2021 15:30',
+                '${reservacion.date} ${reservacion.hour}',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),

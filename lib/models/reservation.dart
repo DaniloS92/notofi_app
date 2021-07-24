@@ -1,34 +1,38 @@
+// To parse this JSON data, do
+//
+//     final reservation = reservationFromJson(jsonString);
+
 import 'dart:convert';
 
-Reservation serviceFromJson(String str) =>
+Reservation reservationFromJson(String str) =>
     Reservation.fromJson(json.decode(str));
 
-String serviceToJson(Reservation data) => json.encode(data.toJson());
+String reservationToJson(Reservation data) => json.encode(data.toJson());
 
 class Reservation {
   Reservation({
-    this.id,
+    this.service,
     this.hour,
-    this.seviceId,
-    this.userId,
+    this.date,
+    this.reservationId,
   });
 
-  String id;
+  String service;
   String hour;
-  String seviceId;
-  String userId;
+  DateTime date;
+  String reservationId;
 
   factory Reservation.fromJson(Map<String, dynamic> json) => Reservation(
-        id: json["_id"],
+        service: json["service"][0],
         hour: json["hour"],
-        seviceId: json["seviceId"],
-        userId: json["userId"],
+        date: DateTime.parse(json["date"]),
+        reservationId: json["id"],
       );
 
   Map<String, dynamic> toJson() => {
-        "_id": id,
+        "service": service,
         "hour": hour,
-        "seviceId": seviceId,
-        "userId": userId,
+        "date": date.toIso8601String(),
+        "id": reservationId,
       };
 }

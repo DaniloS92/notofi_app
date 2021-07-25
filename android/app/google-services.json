@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "504658031957",
+    "project_id": "flutter-sbelta",
+    "storage_bucket": "flutter-sbelta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504658031957:android:74ea21388c5c0e6e382bdc",
+        "android_client_info": {
+          "package_name": "com.example.sbelta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504658031957-2q9bbv0f5sr8b6u38d7ii1cbg8rtn4k8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sbelta",
+            "certificate_hash": "e3ad31536284c0bb3744b12ad0bfed13f76f688c"
+          }
+        },
+        {
+          "client_id": "504658031957-50hk98tg6t5127kq0j34j4vellhq9j65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByPgmd3EPUkvGZ5A4G6vCeNWNgfxsvQ_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504658031957-50hk98tg6t5127kq0j34j4vellhq9j65.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

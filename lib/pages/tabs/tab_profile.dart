@@ -43,7 +43,7 @@ class _TabProfilePageState extends State<TabProfilePage> {
               child: CircleAvatar(
                 backgroundColor: Theme.of(context).primaryColor,
                 child: const Text(
-                  'DA',
+                  'DA', //Todo: Esto tiene que ser dinamico
                   style: TextStyle(
                     fontSize: 30,
                     color: Colors.white,

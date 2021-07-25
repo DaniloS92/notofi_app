@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:chat/services/reservation_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 // import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter_datetime_picker/src/date_format.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:provider/provider.dart';
 
 mostrarAlerta(BuildContext context, String titulo, String subtitulo) {
   if (Platform.isIOS) {
@@ -43,7 +45,7 @@ mostrarAlerta(BuildContext context, String titulo, String subtitulo) {
   );
 }
 
-addReservation(BuildContext context) {
+addReservation(BuildContext context, String idReservacion) {
   final textController = new TextEditingController();
   final format = DateFormat("yyyy-MM-dd HH:mm");
 
@@ -81,32 +83,28 @@ addReservation(BuildContext context) {
               ],
             ),
           )),
-      // content: DateTimeField(
-      //   format: format,
-      //   onShowPicker: (context, currentValue) async {
-      //     final date = await showDatePicker(
-      //         context: context,
-      //         firstDate: DateTime(1900),
-      //         initialDate: currentValue ?? DateTime.now(),
-      //         lastDate: DateTime(2100));
-      //     if (date != null) {
-      //       final time = await showTimePicker(
-      //         context: context,
-      //         initialTime:
-      //             TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
-      //       );
-      //       return DateTimeField.combine(date, time);
-      //     } else {
-      //       return currentValue;
-      //     }
-      //   },
-      // ),
       actions: [
         MaterialButton(
           child: Text('Agregar'),
           elevation: 5,
           textColor: Colors.blue,
-          onPressed: () {},
+          onPressed: () async {
+            final reservation =
+                Provider.of<ReservationService>(context, listen: false);
+            String date = textController.text.split(" ")[0];
+            String hour = textController.text.split(" ")[1];
+            var res =
+                await reservation.saveReservation(idReservacion, date, hour);
+            if (!res['res']) {
+              Navigator.pop(context);
+              mostrarAlerta(context, 'Error', res['msg']);
+            } else {
+              reservation.arrayReservation = [];
+              Navigator.pop(context);
+              mostrarAlerta(
+                  context, 'Reservaciones', 'Cita agendada exitosamente');
+            }
+          },
           //onPressed: () => addBandToList(textController.text),
         )
       ],

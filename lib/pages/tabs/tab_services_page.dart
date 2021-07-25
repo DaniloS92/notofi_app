@@ -40,8 +40,9 @@ Widget buildCard(BuildContext context, Service servicio) {
             height: 300.0,
             width: double.infinity,
             fit: BoxFit.cover,
-            image:
-                'https://st2.depositphotos.com/7865540/11071/i/450/depositphotos_110717374-stock-photo-businessman-showing-paper.jpg',
+            image: servicio.image != null
+                ? servicio.image
+                : 'https://st2.depositphotos.com/7865540/11071/i/450/depositphotos_110717374-stock-photo-businessman-showing-paper.jpg',
             placeholder: "assets/images/loading.gif",
           ),
         ),
@@ -65,7 +66,7 @@ Widget buildCard(BuildContext context, Service servicio) {
               // Text("Promoción válida hasta el 17/Julio/2021", style: dateStyle),
               // FlatButton(onPressed: () => {}, child: Text('Cancelar')),
               TextButton(
-                  onPressed: () => {addReservation(context)},
+                  onPressed: () => {addReservation(context, servicio.id)},
                   child: Text('Reservar')),
             ],
           ),

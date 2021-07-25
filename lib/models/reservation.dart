@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:chat/models/service.dart';
+
 Reservation reservationFromJson(String str) =>
     Reservation.fromJson(json.decode(str));
 
@@ -17,13 +19,13 @@ class Reservation {
     this.reservationId,
   });
 
-  String service;
+  Service service;
   String hour;
   DateTime date;
   String reservationId;
 
   factory Reservation.fromJson(Map<String, dynamic> json) => Reservation(
-        service: json["service"][0],
+        service: Service.fromJson(json["service"]),
         hour: json["hour"],
         date: DateTime.parse(json["date"]),
         reservationId: json["id"],

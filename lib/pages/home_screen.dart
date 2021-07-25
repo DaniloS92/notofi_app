@@ -3,6 +3,8 @@ import 'package:chat/pages/tabs/tab_profile.dart';
 import 'package:chat/pages/tabs/tab_services_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -18,7 +20,16 @@ class HomeScreen extends StatelessWidget {
         bottomNavigationBar: _Navegacion(),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.messenger_sharp),
-          onPressed: () => Navigator.pushNamed(context, 'producto'),
+          onPressed: () async {
+            final link = WhatsAppUnilink(
+              phoneNumber: '+593-987176673',
+              text: "Hola, necesito informacion",
+            );
+            // Convert the WhatsAppUnilink instance to a string.
+            // Use either Dart's string interpolation or the toString() method.
+            // The "launch" method is part of "url_launcher".
+            await launch('$link');
+          },
         ),
       ),
     );

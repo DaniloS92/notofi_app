@@ -24,7 +24,7 @@ class TabAppointmentPage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       child: FutureBuilder(
-        future: getReservation.getAllReservation(),
+        future: getReservation.getAllReservation(context),
         builder: (BuildContext _, AsyncSnapshot<List<Reservation>> snapshot) {
           if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator());
@@ -54,15 +54,15 @@ Widget buildListProduct(BuildContext context, Reservation reservacion) {
             size: 40.0,
           ),
           title: Text(
-            'Masajes Reductores',
+            reservacion.service.name,
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           subtitle: Text(
-            'Limpieza de cutiz, barros y espinillas',
+            reservacion.service.description,
             style: TextStyle(color: Colors.black.withOpacity(0.6)),
           ),
           trailing: Text(
-            "\$ 45.00",
+            "\$ ${reservacion.service.price}",
             style: TextStyle(
               fontSize: 16.0,
               fontWeight: FontWeight.bold,
@@ -75,7 +75,7 @@ Widget buildListProduct(BuildContext context, Reservation reservacion) {
             Container(
               padding: EdgeInsets.only(left: 16.0),
               child: Text(
-                '${reservacion.date} ${reservacion.hour}',
+                '${reservacion.date.toString().replaceAll(' 00:00:00.000Z', '')} ${reservacion.hour}',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),

@@ -15,6 +15,7 @@ class Service {
     this.description,
     this.active,
     this.price,
+    this.image,
   });
 
   String id;
@@ -22,6 +23,7 @@ class Service {
   String description;
   bool active;
   String price;
+  String image;
 
   factory Service.fromJson(Map<String, dynamic> json) => Service(
         id: json["_id"],
@@ -29,6 +31,7 @@ class Service {
         description: json["description"],
         active: json["active"],
         price: json["price"],
+        image: json["image"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -37,5 +40,6 @@ class Service {
         "description": description,
         "active": active,
         "price": price,
+        "image": image,
       };
 }

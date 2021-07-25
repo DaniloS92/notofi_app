@@ -14,9 +14,9 @@ class ReservationService with ChangeNotifier {
   // Create storage
   final _storage = new FlutterSecureStorage();
 
-  final List<Reservation> arrayReservation = [];
+  List<Reservation> arrayReservation = [];
 
-  Future<List<Reservation>> getAllReservation() async {
+  Future<List<Reservation>> getAllReservation(BuildContext context) async {
     final token = await this._storage.read(key: 'token');
     final idUser = await this._storage.read(key: 'usuario_id');
 
@@ -29,7 +29,7 @@ class ReservationService with ChangeNotifier {
       'Content-Type': 'application/json',
     };
 
-    Uri uri = Uri.parse('${Enviroment.apiUrl}/api/get-reservations');
+    Uri uri = Uri.parse('${Enviroment.apiUrl}/api/get-reservations/$idUser');
 
     final resp = await http.get(uri, headers: headers);
 
@@ -41,5 +41,33 @@ class ReservationService with ChangeNotifier {
       }
     }
     return arrayReservation;
+  }
+
+  Future saveReservation(idReservation, date, hour) async {
+    final token = await this._storage.read(key: 'token');
+    final idUser = await this._storage.read(key: 'usuario_id');
+
+    final data = {
+      'date': date,
+      'hour': hour,
+      'service_id': idReservation,
+      'user_id': idUser,
+    };
+
+    final headers = {
+      'Authorization': token,
+      'Content-Type': 'application/json',
+    };
+
+    Uri uri = Uri.parse('${Enviroment.apiUrl}/api/register-reservation');
+
+    final resp = await http.post(uri, body: jsonEncode(data), headers: headers);
+
+    if (resp.statusCode == 200) {
+      //Aqui actualizar array de citas medicas
+      return {'res': true, 'msg': resp.body};
+    } else {
+      return {'res': false, 'msg': resp.body};
+    }
   }
 }

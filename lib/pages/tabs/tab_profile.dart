@@ -38,12 +38,14 @@ class _TabProfilePageState extends State<TabProfilePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: 80,
-              width: 80,
+              height: 100,
+              width: 100,
               child: CircleAvatar(
                 backgroundColor: Theme.of(context).primaryColor,
-                child: const Text(
-                  'DA', //Todo: Esto tiene que ser dinamico
+                child: Text(
+                  user.name
+                      .toUpperCase()
+                      .substring(0, 2), //Todo: Esto tiene que ser dinamico
                   style: TextStyle(
                     fontSize: 30,
                     color: Colors.white,

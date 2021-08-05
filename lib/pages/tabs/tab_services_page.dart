@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class TabServicesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final getServices = Provider.of<GetServices>(context, listen: false);
+    final getServices = Provider.of<GetServices>(context);
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
@@ -18,9 +18,15 @@ class TabServicesPage extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           }
           final servicios = snapshot.data;
-          return ListView.builder(
-            itemCount: servicios.length,
-            itemBuilder: (context, i) => buildCard(context, servicios[i]),
+          return RefreshIndicator(
+            onRefresh: () {
+              getServices.arrayServices = [];
+              return getServices.getAllServices();
+            },
+            child: ListView.builder(
+              itemCount: servicios.length,
+              itemBuilder: (context, i) => buildCard(context, servicios[i]),
+            ),
           );
         },
       ),

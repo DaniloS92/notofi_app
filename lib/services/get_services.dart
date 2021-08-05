@@ -15,7 +15,7 @@ class GetServices with ChangeNotifier {
   // Create storage
   final _storage = new FlutterSecureStorage();
 
-  final List<Service> arrayServices = [];
+  List<Service> arrayServices = [];
 
   // bool get loadServicesData => this._loadServicesData;
 

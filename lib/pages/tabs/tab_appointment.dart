@@ -79,24 +79,25 @@ Widget buildListProduct(BuildContext context, Reservation reservacion) {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
-            ButtonBar(
-              alignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    // Perform some action
-                  },
-                  child: Row(
-                    children: [
-                      Text(
-                        'Cancelar',
-                        style: TextStyle(color: Colors.red),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            SizedBox(height: 40)
+            // ButtonBar(
+            //   alignment: MainAxisAlignment.end,
+            //   children: [
+            //     TextButton(
+            //       onPressed: () {
+            //         // Perform some action
+            //       },
+            //       child: Row(
+            //         children: [
+            //           Text(
+            //             'Cancelar',
+            //             style: TextStyle(color: Colors.red),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ],

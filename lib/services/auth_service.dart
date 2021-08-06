@@ -50,6 +50,27 @@ class AuthService with ChangeNotifier {
       this.usuario = loginResponse.usuario;
       await this._guardarToken(loginResponse.token);
       await this._guardarIdUsuario(usuario.id);
+      await this.sendTokenFirebase();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> sendTokenFirebase() async {
+    final token = await this._storage.read(key: 'token');
+    final tokenFirebase = await this._storage.read(key: 'token_notification');
+    final data = {'token': tokenFirebase};
+
+    Uri uri = Uri.parse('${Enviroment.apiUrl}/api/register-tokens');
+
+    final resp = await http.post(uri, body: jsonEncode(data), headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token,
+    });
+
+    if (resp.statusCode == 200) {
+      print(resp.body);
       return true;
     } else {
       return false;
@@ -84,6 +105,7 @@ class AuthService with ChangeNotifier {
       this.usuario = loginResponse.usuario;
       // await this._guardarToken(loginResponse.token);
       await this.login(email, pass);
+      await this.sendTokenFirebase();
       return true;
     } else {
       final respBody = jsonDecode(resp.body);
@@ -152,6 +174,7 @@ class AuthService with ChangeNotifier {
       final loginResponse = loginResponseFromJson(resp.body);
       this.usuario = loginResponse.usuario;
       await this._guardarIdUsuario(usuario.id);
+      await this.sendTokenFirebase();
       return true;
     } else {
       this.logout();

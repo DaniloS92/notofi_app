@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class PushNotificationService {
   static FirebaseMessaging messaging = FirebaseMessaging.instance;
   static String token;
+  static var _storage = new FlutterSecureStorage();
 
   static const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
@@ -57,6 +59,7 @@ class PushNotificationService {
     await Firebase.initializeApp();
     token = await FirebaseMessaging.instance.getToken();
     print('Token: $token');
+    await _storage.write(key: 'token_notification', value: token);
 
     //Handlers
     FirebaseMessaging.onBackgroundMessage(_backgroundHandler);

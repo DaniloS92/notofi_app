@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Sbelta App',
-        initialRoute: 'login',
+        initialRoute: 'loading',
         routes: appRoutes,
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,

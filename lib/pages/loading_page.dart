@@ -1,3 +1,4 @@
+import 'package:chat/pages/home_screen.dart';
 import 'package:chat/pages/login_page.dart';
 import 'package:chat/pages/usuarios_page.dart';
 import 'package:chat/services/auth_service.dart';
@@ -12,7 +13,13 @@ class LoadinPage extends StatelessWidget {
         future: checkLoginState(context),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           return Center(
-            child: Text('Espere weon....'),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+                Text('Espere un momento....'),
+              ],
+            ),
           );
         },
       ),
@@ -28,7 +35,7 @@ class LoadinPage extends StatelessWidget {
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
-            pageBuilder: (_, __, ___) => UsuariosPage(),
+            pageBuilder: (_, __, ___) => HomeScreen(),
             transitionDuration: Duration(milliseconds: 0)),
       );
     } else {

@@ -51,6 +51,7 @@ class GetServices with ChangeNotifier {
         arrayServices.add(Service.fromJson(line));
       }
     }
+    notifyListeners();
     return arrayServices;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:chat/global/enviroment.dart';
 import 'package:chat/helpers/mostrar_alerta.dart';
 import 'package:chat/models/service.dart';
 import 'package:chat/services/get_services.dart';
@@ -47,7 +48,7 @@ Widget buildCard(BuildContext context, Service servicio) {
             width: double.infinity,
             fit: BoxFit.cover,
             image: servicio.image != null
-                ? servicio.image
+                ? '${Enviroment.apiUrl}/api/get-image-service/${servicio.image}'
                 : 'https://st2.depositphotos.com/7865540/11071/i/450/depositphotos_110717374-stock-photo-businessman-showing-paper.jpg',
             placeholder: "assets/images/loading.gif",
           ),
